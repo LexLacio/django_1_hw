@@ -9,19 +9,14 @@ class SensorsList(ListCreateAPIView):  # Специальный класс ListA
     serializer_class = SensorSerializer
 
 
+# 4. Получить список датчиков. Выдается список с краткой информацией по датчикам: ID, название и описание.
 # 2. Изменить датчик. Указываются название и/или описание.
 class SensorUpdate(RetrieveUpdateAPIView):
     queryset = Sensor.objects.all()
-    serializer_class = SensorSerializer
+    serializer_class = SensorDetailSerializer
 
 
 # 3. Добавить измерение. Указываются ID датчика и температура.
 class MeasurementsAdd(CreateAPIView):
     queryset = Measurement.objects.all()
     serializer_class = MeasurementSerializer
-
-
-# 4. Получить список датчиков. Выдается список с краткой информацией по датчикам: ID, название и описание.
-class SensorView(RetrieveAPIView):
-    queryset = Sensor.objects.all()
-    serializer_class = SensorDetailSerializer

@@ -46,17 +46,17 @@ POST {{baseUrl}}/stocks/
 Content-Type: application/json
 
 {
-  "address": "мой адрес не дом и не улица, мой адрес сегодня такой: www.ленинград-спб.ru3",
+  "address": "Запад",
   "positions": [
     {
-      "product": 2,
-      "quantity": 250,
+      "product": 1,
+      "quantity": 30,
       "price": 120.50
     },
     {
-      "product": 3,
-      "quantity": 100,
-      "price": 180
+      "product": 2,
+      "quantity": 50,
+      "price": 200
     }
   ]
 }
@@ -84,6 +84,12 @@ Content-Type: application/json
 
 ###
 
-# поиск складов, где есть определенный продукт
-GET {{baseUrl}}/stocks/?products=2
+# поиск складов, где есть где есть определенный продукт по id
+GET {{baseUrl}}/stocks/?search=1
+Content-Type: application/json
+
+
+###
+# поиск складов, где есть где есть определенный продукт по описанию
+GET {{baseUrl}}/stocks/?search=Луховицкий
 Content-Type: application/json

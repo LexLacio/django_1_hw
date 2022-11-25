@@ -14,6 +14,11 @@ class ProductPositionSerializer(serializers.ModelSerializer):
         model = StockProduct
         fields = ['product', 'quantity', 'price']
 
+    # def to_representation(self, instance):
+    #     ret = super().to_representation(instance)
+    #     ret['product'] = ret['title']
+    #     return ret
+
 
 class StockSerializer(serializers.ModelSerializer):
     positions = ProductPositionSerializer(many=True)
@@ -39,5 +44,9 @@ class StockSerializer(serializers.ModelSerializer):
         # обновляем склад по его параметрам
         stock = super().update(instance, validated_data)
         for item in positions:
-            StockProduct.objects.update_or_create(stock=stock, **item)
+            product = item.get('product')
+            quantity = item.get('quantity')
+            price = item.get('price')
+            StockProduct.objects.update_or_create(defaults={'price': price, 'quantity': quantity},
+                                                  stock=stock, product=product)
         return stock
